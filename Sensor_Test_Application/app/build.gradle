@@ -5,7 +5,7 @@ android {
     buildToolsVersion "27.0.1"
     defaultConfig {
         applicationId "com.example.parktaeim.sensor_test_application"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -32,4 +32,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:cardview-v7:26.+'
     implementation project(':ledctl')
+    compile (group: 'com.scichart.library', name: 'core', version: '2.0.0.1806', ext: 'aar')
+    compile (group: 'com.scichart.library', name: 'data', version: '2.0.0.1806', ext: 'aar')
+    compile (group: 'com.scichart.library', name: 'drawing', version: '2.0.0.1806', ext: 'aar')
+    compile (group: 'com.scichart.library', name: 'charting', version: '2.0.0.1806', ext: 'aar')
+    compile (group: 'com.scichart.library', name: 'extensions', version: '2.0.0.1806', ext: 'aar')
 }

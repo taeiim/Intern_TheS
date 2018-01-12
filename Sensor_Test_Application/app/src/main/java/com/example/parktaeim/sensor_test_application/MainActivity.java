@@ -9,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.renderscript.Sampler;
@@ -29,7 +30,10 @@ import android.widget.Toolbar;
 
 import com.hyperiontech.ledctl.VueLed;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -74,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private VueLed vueLed2;
     private TextView colorTextView;
 
+    private BroadcastReceiver broadcastReceiver;
+
+    MediaRecorder recorder = new MediaRecorder();
+    private TextView micDbTextView;
 
 
     @Override
@@ -162,31 +170,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vueLed2 = new VueLed("blue");
         colorTextView = (TextView) findViewById(R.id.colorTextView);
 
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-//        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "NonSleep");
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP|PowerManager.ON_AFTER_RELEASE, "NonSleep");
+        setMicDB();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP|PowerManager.ON_AFTER_RELEASE, "NonSleep");
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d("power intent==", String.valueOf(intent.getAction()));
-                Log.d("power~~~", "off");
-//                                        SetPowerManager.releaseCpuLock();
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
                 wakeLock.acquire();
+                wakeLock.release();
 
                 keyPressTextView.setText("전원 버튼");
-                SetPowerManager.acquireCpuWakeLock(getApplicationContext());
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                return;
 
+                return;
             }
         };
-
         registerReceiver(broadcastReceiver, intentFilter);
 
     }
-
 
     @Override
     protected void onResume() {
@@ -197,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sensorManager.registerListener(lightListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(compassListener, accelometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(compassListener, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-//        sensorManager.registerListener(compassListener, magneticSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
@@ -424,6 +431,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    }
+
+    private void setMicDB(){
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new RecorderTask(recorder), 0, 500);
+        recorder.setOutputFile("/dev/null");
+
+        try {
+            recorder.prepare();
+            recorder.start();
+
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        micDbTextView = (TextView) findViewById(R.id.micDbTextView);
+
+    }
+
+    private class RecorderTask extends TimerTask {
+        private MediaRecorder recorder;
+
+        public RecorderTask(MediaRecorder recorder) {
+            this.recorder = recorder;
+        }
+
+        public void run() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    int amplitude = recorder.getMaxAmplitude();
+                    double amplitudeDb = 20 * Math.log10((double)Math.abs(amplitude));
+                    Log.d("mic haha",String.valueOf(amplitudeDb));
+                    if(String.valueOf(amplitudeDb).equals("-Infinity")) amplitudeDb=0;
+
+                    micDbTextView.setText(String.format("%.2f",amplitudeDb));
+                }
+            });
 
         }
     }

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
@@ -27,31 +28,31 @@ public class KeyPressActivity extends AppCompatActivity {
 
         keyTextView = (TextView) findViewById(R.id.keyTextView);
 
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-//        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "NonSleep");
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP|PowerManager.ON_AFTER_RELEASE, "NonSleep");
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP|PowerManager.ON_AFTER_RELEASE, "NonSleep");
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d("power intent==", String.valueOf(intent.getAction()));
-                Log.d("power~~~", "off");
-//                                        SetPowerManager.releaseCpuLock();
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
                 wakeLock.acquire();
+                wakeLock.release();
 
                 keyTextView.setText("전원 버튼");
 
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 return;
-
-            }
+                                                                                        }
         };
 
         registerReceiver(broadcastReceiver, intentFilter);
 
     }
-
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {

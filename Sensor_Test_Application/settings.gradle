@@ -1,1 +1,3 @@
-include ':app', ':ledctl'
+include ':app', ':ledctl', ':audioSpectrumAnalyzer', ':FFTLibrary'
+project(':audioSpectrumAnalyzer').projectDir = new File('audio-analyzer-for-android/audioSpectrumAnalyzer')
+project(':FFTLibrary').projectDir = new File('audio-analyzer-for-android/FFTLibrary')
