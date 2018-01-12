@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/accelometer"
+        android:title="Accelometer"/>
+
+    <item
+        android:id="@+id/gyroscope"
+        android:title="Gyroscope"/>
+
+    <item
+        android:id="@+id/compass"
+        android:title="Compass"/>
+
+    <item
+        android:id="@+id/proximity"
+        android:title="Proximity"/>
+
+    <item
+        android:id="@+id/light"
+        android:title="Light"/>
+
+</menu>
