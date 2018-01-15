@@ -42,7 +42,7 @@ public class ProximityActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        sensorManager.registerListener(proximityListener,proximitySensor,SensorManager.SENSOR_PROXIMITY);
+        sensorManager.registerListener(proximityListener,proximitySensor,SensorManager.SENSOR_PROXIMITY);
     }
 
     @Override

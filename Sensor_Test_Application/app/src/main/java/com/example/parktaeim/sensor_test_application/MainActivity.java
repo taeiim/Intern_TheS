@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private VueLed vueLed;
     private VueLed vueLed1;
     private VueLed vueLed2;
+    private VueLed flash;
     private TextView colorTextView;
 
     private BroadcastReceiver broadcastReceiver;
@@ -170,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vueLed = new VueLed("red");
         vueLed1 = new VueLed("green");
         vueLed2 = new VueLed("blue");
+        flash = new VueLed("flash");
+
         colorTextView = (TextView) findViewById(R.id.colorTextView);
 
     }
@@ -200,10 +203,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-//        sensorManager.registerListener(accelometerListener, accelometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
-//        sensorManager.registerListener(gyroscopeListener, gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
-//        sensorManager.registerListener(proximityListener, proximitySensor, SensorManager.SENSOR_PROXIMITY);
-//        sensorManager.registerListener(lightListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(accelometerListener, accelometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(gyroscopeListener, gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(proximityListener, proximitySensor, SensorManager.SENSOR_PROXIMITY);
+        sensorManager.registerListener(lightListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(compassListener, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         setMicDB();
@@ -224,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             vueLed.setState(0);
             vueLed1.setState(0);
             vueLed2.setState(0);
+            flash.setState(0);
             colorTextView.setTextColor(Color.BLACK);
             colorTextView.setText("OFF");
         }
@@ -298,6 +302,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 } else if (colorTextView.getText().equals("BLUE")) {
                     vueLed2.setState(0);
+                    flash.setState(1);
+                    colorTextView.setText("FLASH");
+                    colorTextView.setTextColor(Color.YELLOW);
+                }else if(colorTextView.getText().equals("FLASH")){
+                    flash.setState(0);
                     colorTextView.setTextColor(Color.BLACK);
                     colorTextView.setText("OFF");
                 }
