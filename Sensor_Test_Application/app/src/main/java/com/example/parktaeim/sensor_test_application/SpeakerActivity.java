@@ -18,6 +18,6 @@ public class SpeakerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_speaker);
 
 //        AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC)
-
+        
     }
 }

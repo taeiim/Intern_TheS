@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -24,13 +27,20 @@
         <activity android:name=".AccelometerActivity"/>
         <activity android:name=".CompassActivity"/>
         <activity android:name=".GyroscopeActivity"/>
-        <activity android:name=".ProximityActivity"/>
+        <activity android:name=".ProximityActivity">
+
+        </activity>
         <activity android:name=".LightActivity"/>
         <activity android:name=".GpsActivity"/>
         <activity android:name=".MicActivity"/>
         <activity android:name=".SpeakerActivity"/>
         <activity android:name=".KeyPressActivity"/>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCYRsisq_Ai42pvIGUksS_4afKXQ5bCR44"/>
     </application>
+
+
 
 </manifest>

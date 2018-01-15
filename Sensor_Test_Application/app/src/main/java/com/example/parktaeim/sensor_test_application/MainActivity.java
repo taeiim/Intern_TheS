@@ -1,9 +1,11 @@
 package com.example.parktaeim.sensor_test_application;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -13,6 +15,7 @@ import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.renderscript.Sampler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -50,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Sensor gyroscopeSensor;
     private Sensor proximitySensor;
     private Sensor lightSensor;
-    //    private Sensor magneticSensor;
     private Sensor orientationSensor;
 
     private TextView accX, accZ, accY;
@@ -71,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CardView speakerCardView;
     private CardView micCardView;
 
-    float[] gravity, geomagnetic;
 
     private VueLed vueLed;
     private VueLed vueLed1;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MediaRecorder recorder = new MediaRecorder();
     private TextView micDbTextView;
 
+    public static final int RECORD_AUDIO = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vueLed2 = new VueLed("blue");
         colorTextView = (TextView) findViewById(R.id.colorTextView);
 
-        setMicDB();
     }
 
     @Override
@@ -199,12 +200,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(accelometerListener, accelometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        sensorManager.registerListener(gyroscopeListener, gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        sensorManager.registerListener(proximityListener, proximitySensor, SensorManager.SENSOR_PROXIMITY);
-        sensorManager.registerListener(lightListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        sensorManager.registerListener(compassListener, accelometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+//        sensorManager.registerListener(accelometerListener, accelometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+//        sensorManager.registerListener(gyroscopeListener, gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
+//        sensorManager.registerListener(proximityListener, proximitySensor, SensorManager.SENSOR_PROXIMITY);
+//        sensorManager.registerListener(lightListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(compassListener, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        setMicDB();
 
     }
 
@@ -226,6 +228,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             colorTextView.setText("OFF");
         }
 
+        try {
+            recorder.stop();
+            recorder.reset();
+
+
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -233,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("key press event ===", String.valueOf(event));
         Log.d("key press getAction===", String.valueOf(event.getKeyCode()));
 
-        if(event.getKeyCode()==24){
+        if(event.getKeyCode()==27){
             keyPressTextView.setText("카메라 촬영 버튼("+event.getKeyCode()+")");
 
         }else {
@@ -351,6 +362,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
     // 근접 센서
     private class proximityListener implements SensorEventListener {
         @Override
@@ -358,7 +370,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             proximityTv.setText(String.format("%.0f", event.values[0]));
 
             Log.d("proximity sensor:", String.valueOf(event.values[0]));
-
         }
 
         @Override
@@ -439,9 +450,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder.setOutputFile("/dev/null");
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new RecorderTask(recorder), 0, 500);
-        recorder.setOutputFile("/dev/null");
 
         try {
             recorder.prepare();
@@ -470,7 +481,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     int amplitude = recorder.getMaxAmplitude();
                     double amplitudeDb = 20 * Math.log10((double)Math.abs(amplitude));
-                    Log.d("mic haha",String.valueOf(amplitudeDb));
+                    Log.d("mic amplitude",String.valueOf(amplitude));
+                    Log.d("mic amplitudeDb",String.valueOf(amplitudeDb));
                     if(String.valueOf(amplitudeDb).equals("-Infinity")) amplitudeDb=0;
 
                     micDbTextView.setText(String.format("%.2f",amplitudeDb));
@@ -516,5 +528,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
+    }
 }

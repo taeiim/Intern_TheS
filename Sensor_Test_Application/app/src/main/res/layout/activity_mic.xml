@@ -25,27 +25,25 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/chartLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
+        <com.scichart.charting.visuals.SciChartSurface
+            android:id="@+id/sciChartSurface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.scichart.charting.visuals.SciChartSurface>
         <TextView
             android:id="@+id/dbTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="#000"
-            android:textSize="40dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" db"
-            android:textColor="#000"
-            android:textSize="40dp" />
-
-    </LinearLayout>
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"
+            android:text="2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"/>
+    </RelativeLayout>
 </LinearLayout>

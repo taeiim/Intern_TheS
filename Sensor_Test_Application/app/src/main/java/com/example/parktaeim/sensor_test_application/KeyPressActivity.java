@@ -21,6 +21,8 @@ import android.widget.TextView;
 public class KeyPressActivity extends AppCompatActivity {
 
     private TextView keyTextView;
+    private BroadcastReceiver broadcastReceiver;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +36,10 @@ public class KeyPressActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP|PowerManager.ON_AFTER_RELEASE, "NonSleep");
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "NonSleep");
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
@@ -45,9 +47,8 @@ public class KeyPressActivity extends AppCompatActivity {
                 wakeLock.release();
 
                 keyTextView.setText("전원 버튼");
-
                 return;
-                                                                                        }
+            }
         };
 
         registerReceiver(broadcastReceiver, intentFilter);
@@ -56,15 +57,23 @@ public class KeyPressActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        Log.d("key Press ==",String.valueOf(event));
-        Log.d("key Press keyCode",String.valueOf(event.getKeyCode()));
+        Log.d("key Press ==", String.valueOf(event));
+        Log.d("key Press keyCode", String.valueOf(event.getKeyCode()));
 
-        if(event.getKeyCode() == 24){
-            keyTextView.setText("카메라 촬영 버튼 ("+event.getKeyCode()+")");
+        if (event.getKeyCode() == 27) {
+            keyTextView.setText("카메라 촬영 버튼 (" + event.getKeyCode() + ")");
+        } else if (event.getKeyCode() == 4) {
+            keyTextView.setText("뒤로 가기 (" + event.getKeyCode() + ")");
         } else {
             keyTextView.setText(event.toString());
         }
 
         return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
     }
 }
