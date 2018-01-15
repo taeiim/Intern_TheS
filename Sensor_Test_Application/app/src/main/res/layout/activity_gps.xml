@@ -29,16 +29,15 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="16dp">
+                android:layout_alignParentRight="true">
                 <ImageView
                     android:id="@+id/gpsMapIcon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_map"/>
                 <ImageView
                     android:id="@+id/gpsTextIcon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_text"
                     android:visibility="gone"/>

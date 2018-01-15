@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AccelometerActivity"/>
         <activity android:name=".CompassActivity"/>
         <activity android:name=".GyroscopeActivity"/>
         <activity android:name=".ProximityActivity">

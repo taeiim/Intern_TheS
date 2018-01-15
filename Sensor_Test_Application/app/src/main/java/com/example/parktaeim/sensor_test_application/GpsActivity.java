@@ -135,7 +135,7 @@ public class GpsActivity extends AppCompatActivity implements LocationListener, 
         markerOptions.title("현재 위치");
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(CURRENT));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
     @Override

@@ -11,6 +11,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -31,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.android.gms.maps.LocationSource;
 import com.hyperiontech.ledctl.VueLed;
 
 import java.io.IOException;
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView proximityTv;
     private TextView lightTv;
     private TextView keyPressTextView;
+    private TextView latTv,lonTv;
 
     private CardView accelometerCardView;
     private CardView gyroscopeCardView;
@@ -85,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MediaRecorder recorder = new MediaRecorder();
     private TextView micDbTextView;
 
-    public static final int RECORD_AUDIO = 0;
+    private static final String[] LOCATION_PERMS = {
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         compassA = (TextView) findViewById(R.id.compass_azimuth);
         compassP = (TextView) findViewById(R.id.compass_pitch);
         compassR = (TextView) findViewById(R.id.compass_roll);
+
+        latTv = (TextView) findViewById(R.id.latTextView);
+        lonTv = (TextView) findViewById(R.id.lonTextView);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -175,7 +185,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         colorTextView = (TextView) findViewById(R.id.colorTextView);
 
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER) && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,LOCATION_PERMS,2);
+
+            }
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 10, locationListener);
+
+        if (locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER) && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+
+
     }
+
+    private final LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            latTv.setText(String.valueOf(location.getLatitude()));
+            lonTv.setText(String.valueOf(location.getLongitude()));
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     @Override
     protected void onStart() {
@@ -264,7 +310,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.accelometerCardView:
-//                startActivity(new Intent(this, AccelometerActivity.class));
                 break;
             case R.id.gyroscopeCardView:
                 startActivity(new Intent(this, GyroscopeActivity.class));
