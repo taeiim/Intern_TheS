@@ -45,5 +45,13 @@
             android:text="2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"
+            android:text=" db"
+            android:layout_toRightOf="@+id/dbTextView"
+            android:layout_marginTop="30dp"/>
     </RelativeLayout>
 </LinearLayout>

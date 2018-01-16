@@ -63,7 +63,7 @@ public class MicActivity extends AppCompatActivity {
         TextAnnotation textAnnotation = sciChartBuilder.newTextAnnotation()
                 .withX1(15)
                 .withY1(80)
-                .withText("40.23 db")
+                .withText("0 db")
                 .withHorizontalAnchorPoint(HorizontalAnchorPoint.Center)
                 .withVerticalAnchorPoint(VerticalAnchorPoint.Center)
                 .withFontStyle(25, ColorUtil.White)
@@ -75,7 +75,7 @@ public class MicActivity extends AppCompatActivity {
                 .build();
 
 
-        final int fifoCapacity = 30;
+        final int fifoCapacity = 200;
         lineData = sciChartBuilder.newXyDataSeries(Integer.class, Double.class)
                 .withFifoCapacity(fifoCapacity)
                 .build();
@@ -133,7 +133,7 @@ public class MicActivity extends AppCompatActivity {
                     Log.d("mic haha",String.valueOf(amplitudeDb));
                     if(String.valueOf(amplitudeDb).equals("-Infinity")) amplitudeDb=0;
 
-                    micDbTextView.setText(String.format("%.2f",amplitudeDb)+" db");
+                    micDbTextView.setText(String.format("%.2f",amplitudeDb));
                     lineData.append(i,amplitudeDb);
 
                     sciChartSurface.zoomExtents();

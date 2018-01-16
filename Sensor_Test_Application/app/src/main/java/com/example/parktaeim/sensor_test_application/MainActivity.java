@@ -108,21 +108,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         accX = (TextView) findViewById(R.id.accelometer_x);
         accZ = (TextView) findViewById(R.id.accelometer_z);
         accY = (TextView) findViewById(R.id.accelometer_y);
-
         gyroX = (TextView) findViewById(R.id.gyroscope_x);
         gyroZ = (TextView) findViewById(R.id.gyroscope_z);
         gyroY = (TextView) findViewById(R.id.gyroscope_y);
-
         proximityTv = (TextView) findViewById(R.id.proximity_cm);
-
         lightTv = (TextView) findViewById(R.id.light_lux);
-
         compassA = (TextView) findViewById(R.id.compass_azimuth);
         compassP = (TextView) findViewById(R.id.compass_pitch);
         compassR = (TextView) findViewById(R.id.compass_roll);
-
         latTv = (TextView) findViewById(R.id.latTextView);
         lonTv = (TextView) findViewById(R.id.lonTextView);
+        colorTextView = (TextView) findViewById(R.id.colorTextView);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -132,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         orientationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-//        magneticSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);  // 자기장 센서 (나침반 구하기 위해서 가속도센서, 자기장센서 필요)
 
         if (lightSensor == null) {
             lightTv.setText("Light Sensor is NULL!!!!!!!!");
@@ -183,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vueLed2 = new VueLed("blue");
         flash = new VueLed("flash");
 
-        colorTextView = (TextView) findViewById(R.id.colorTextView);
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -281,12 +275,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             recorder.stop();
             recorder.reset();
-
-
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
