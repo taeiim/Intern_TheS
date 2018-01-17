@@ -16,6 +16,7 @@ import com.scichart.charting.visuals.SciChartSurface;
 import com.scichart.charting.visuals.annotations.HorizontalAnchorPoint;
 import com.scichart.charting.visuals.annotations.TextAnnotation;
 import com.scichart.charting.visuals.annotations.VerticalAnchorPoint;
+import com.scichart.charting.visuals.axes.AutoRange;
 import com.scichart.charting.visuals.axes.IAxis;
 import com.scichart.charting.visuals.pointmarkers.EllipsePointMarker;
 import com.scichart.charting.visuals.renderableSeries.IRenderableSeries;
@@ -51,19 +52,19 @@ public class MicActivity extends AppCompatActivity {
         sciChartBuilder = SciChartBuilder.instance();
 
         final IAxis xAxis = sciChartBuilder.newNumericAxis()
-                .withAxisTitle("sec")
-                .withVisibleRange(0,30)
+                .withAxisTitle("")
+                .withVisibleRange(0, 30)
                 .build();
 
         final IAxis yAxis = sciChartBuilder.newNumericAxis()
                 .withAxisTitle("db")
-                .withVisibleRange(0,120)
+                .withVisibleRange(0, 120)
+                .withAutoRangeMode(AutoRange.Always)
                 .build();
 
         TextAnnotation textAnnotation = sciChartBuilder.newTextAnnotation()
                 .withX1(15)
                 .withY1(80)
-                .withText("0 db")
                 .withHorizontalAnchorPoint(HorizontalAnchorPoint.Center)
                 .withVerticalAnchorPoint(VerticalAnchorPoint.Center)
                 .withFontStyle(25, ColorUtil.White)
@@ -75,23 +76,23 @@ public class MicActivity extends AppCompatActivity {
                 .build();
 
 
-        final int fifoCapacity = 200;
+        final int fifoCapacity = 150;
         lineData = sciChartBuilder.newXyDataSeries(Integer.class, Double.class)
                 .withFifoCapacity(fifoCapacity)
                 .build();
 
         final IRenderableSeries lineSeries = sciChartBuilder.newLineSeries()
                 .withDataSeries(lineData)
-                .withStrokeStyle(ColorUtil.Red,2f,true)
+                .withStrokeStyle(ColorUtil.Red, 2f, true)
                 .build();
 
         sciChartSurface.getRenderableSeries().add(lineSeries);
 
 
-        Collections.addAll(sciChartSurface.getYAxes(),yAxis);
-        Collections.addAll(sciChartSurface.getXAxes(),xAxis);
-        Collections.addAll(sciChartSurface.getAnnotations(),textAnnotation);
-        Collections.addAll(sciChartSurface.getChartModifiers(),modifierGroup);
+        Collections.addAll(sciChartSurface.getYAxes(), yAxis);
+        Collections.addAll(sciChartSurface.getXAxes(), xAxis);
+        Collections.addAll(sciChartSurface.getAnnotations(), textAnnotation);
+        Collections.addAll(sciChartSurface.getChartModifiers(), modifierGroup);
 
 
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -123,19 +124,20 @@ public class MicActivity extends AppCompatActivity {
             this.recorder = recorder;
         }
 
-        int i=0;
+        int i = 0;
         public void run() {
-            UpdateSuspender.using(sciChartSurface,new Runnable() {
+            UpdateSuspender.using(sciChartSurface, new Runnable() {
                 @Override
                 public void run() {
                     int amplitude = recorder.getMaxAmplitude();
-                    double amplitudeDb = 20 * Math.log10((double)Math.abs(amplitude));
-                    Log.d("mic haha",String.valueOf(amplitudeDb));
-                    if(String.valueOf(amplitudeDb).equals("-Infinity")) amplitudeDb=0;
+                    double amplitudeDb = 20 * Math.log10((double) Math.abs(amplitude));
+                    Log.d("mic haha", String.valueOf(amplitudeDb));
+                    if (String.valueOf(amplitudeDb).equals("-Infinity")) amplitudeDb = 0;
 
-                    micDbTextView.setText(String.format("%.2f",amplitudeDb));
-                    lineData.append(i,amplitudeDb);
-
+                    if (amplitudeDb != 0) {
+                        micDbTextView.setText(String.format("%.2f", amplitudeDb));
+                        lineData.append(i, amplitudeDb);
+                    }
                     sciChartSurface.zoomExtents();
 
                     ++i;
@@ -144,8 +146,6 @@ public class MicActivity extends AppCompatActivity {
             });
 
         }
-
-
     }
 
     @Override

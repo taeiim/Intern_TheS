@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:textColor="#FFFFFF"
-            android:text="2"
+            android:text="00.00"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"/>
         <TextView
@@ -52,6 +52,6 @@
             android:textColor="#FFFFFF"
             android:text=" db"
             android:layout_toRightOf="@+id/dbTextView"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="30dp" />
     </RelativeLayout>
 </LinearLayout>

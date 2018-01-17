@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView proximityTv;
     private TextView lightTv;
     private TextView keyPressTextView;
-    private TextView latTv,lonTv;
+    private TextView latTv, lonTv;
 
     private CardView accelometerCardView;
     private CardView gyroscopeCardView;
@@ -181,12 +181,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if (locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER) && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+        if (locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER) && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,LOCATION_PERMS,2);
+                ActivityCompat.requestPermissions(this, LOCATION_PERMS, 2);
 
             }
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 10, locationListener);
+        }
 
         if (locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER) && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
@@ -221,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP|PowerManager.ON_AFTER_RELEASE, "NonSleep");
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "NonSleep");
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 
         broadcastReceiver = new BroadcastReceiver() {
@@ -285,11 +286,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("key press event ===", String.valueOf(event));
         Log.d("key press getAction===", String.valueOf(event.getKeyCode()));
 
-        if(event.getKeyCode()==27){
-            keyPressTextView.setText("카메라 촬영 버튼("+event.getKeyCode()+")");
+        if (event.getKeyCode() == 27) {
+            keyPressTextView.setText("카메라 촬영 버튼(" + event.getKeyCode() + ")");
 
-        }else {
-            keyPressTextView.setText("KeyCode is "+event.getKeyCode());
+        } else {
+            keyPressTextView.setText("KeyCode is " + event.getKeyCode());
         }
 
         return super.dispatchKeyEvent(event);
@@ -341,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     flash.setState(1);
                     colorTextView.setText("FLASH");
                     colorTextView.setTextColor(Color.YELLOW);
-                }else if(colorTextView.getText().equals("FLASH")){
+                } else if (colorTextView.getText().equals("FLASH")) {
                     flash.setState(0);
                     colorTextView.setTextColor(Color.BLACK);
                     colorTextView.setText("OFF");
@@ -450,39 +451,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-            // Setting textView
             compassA.setText(String.format("%.2f", event.values[0]));  // Azimuth (방위)
             compassP.setText(String.format("%.2f", event.values[1]));  // Pitch (경사도)
             compassR.setText(String.format("%.2f", event.values[2]));  // Roll (좌우 회전)
 
-//            Log.d("compass getType()==", String.valueOf(event.sensor.getType()));
-
-//            switch (event.sensor.getType()) {
-//                case 1: // Sensor.TYPE_ACCELEROMETER
-//                    gravity = event.values.clone();
-//                    break;
-//                case 2: //Sensor.TYPE_MAGNETIC_FIELD
-//                    geomagnetic = event.values.clone();
-//                    break;
-//                default:
-//                    return;
-//            }
-//
-//            if (gravity != null && geomagnetic != null) {
-//                float[] I = new float[9];  // Inclination matrix (회전 변환 행렬)
-//                float[] R = new float[9];  // Rotation matrix   (기기의 좌표계를 지구 좌표계로 변형시켜주는 행렬)
-//
-//                SensorManager.getRotationMatrix(R, I, gravity, geomagnetic);   //getRotationMatrix
-//
-//                float[] values = new float[3];
-//                SensorManager.getOrientation(R, values);    // getOrientation으로 values 구하기
-//
-//                // Setting textView
-//                compassA.setText(String.format("%.2f", event.values[0]));  // Azimuth (방위)
-//                compassP.setText(String.format("%.2f", event.values[1]));  // Pitch (경사도)
-//                compassR.setText(String.format("%.2f", event.values[2]));  // Roll (좌우 회전)
-//
-//            }
         }
 
         @Override
@@ -491,7 +463,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void setMicDB(){
+    private void setMicDB() {
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
@@ -525,12 +497,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     int amplitude = recorder.getMaxAmplitude();
-                    double amplitudeDb = 20 * Math.log10((double)Math.abs(amplitude));
-                    Log.d("mic amplitude",String.valueOf(amplitude));
-                    Log.d("mic amplitudeDb",String.valueOf(amplitudeDb));
-                    if(String.valueOf(amplitudeDb).equals("-Infinity")) amplitudeDb=0;
+                    double amplitudeDb = 20 * Math.log10((double) Math.abs(amplitude));
+                    Log.d("mic amplitude", String.valueOf(amplitude));
+                    Log.d("mic amplitudeDb", String.valueOf(amplitudeDb));
+                    if (String.valueOf(amplitudeDb).equals("-Infinity")) amplitudeDb = 0;
 
-                    micDbTextView.setText(String.format("%.2f",amplitudeDb));
+                    micDbTextView.setText(String.format("%.2f", amplitudeDb));
                 }
             });
 
