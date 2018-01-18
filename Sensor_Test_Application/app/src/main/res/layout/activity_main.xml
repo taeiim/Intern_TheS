@@ -692,7 +692,6 @@
                                 android:id="@+id/hdmiOnOffTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="ON"
                                 android:textColor="#000"
                                 android:textSize="20dp" />
 
@@ -739,10 +738,16 @@
                             android:id="@+id/bluetoothTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ON"
                             android:textColor="#000"
-                            android:textSize="20dp" />
+                            android:textSize="20dp"
+                            android:textStyle="bold"/>
 
+                        <TextView
+                            android:id="@+id/bluetoothInfoTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#B2B2B2"
+                            android:textSize="15dp" />
                     </LinearLayout>
 
 
@@ -776,9 +781,16 @@
                             android:id="@+id/wifiTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ON"
                             android:textColor="#000"
-                            android:textSize="20dp" />
+                            android:textSize="20dp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/wifiInfoTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#B2B2B2"
+                            android:textSize="15dp"/>
 
                     </LinearLayout>
 

@@ -1,6 +1,8 @@
 package com.example.parktaeim.sensor_test_application;
 
 import android.Manifest;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaRecorder;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.renderscript.Sampler;
@@ -68,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView latTv, lonTv;
     private TextView hdmiTextView;
     private TextView bluetoothTextView;
+    private TextView bluetoothInfoTextView;
     private TextView wifiTextView;
+    private TextView wifiInfoTextView;
 
     private CardView accelometerCardView;
     private CardView gyroscopeCardView;
@@ -92,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView colorTextView;
 
     private BroadcastReceiver broadcastReceiver;
+
+    private WifiManager wifiManager;
+    private BluetoothAdapter bluetoothAdapter;
 
     MediaRecorder recorder = new MediaRecorder();
     private TextView micDbTextView;
@@ -128,7 +136,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         keyPressTextView = (TextView) findViewById(R.id.keyPressTextView);
         hdmiTextView = (TextView) findViewById(R.id.hdmiOnOffTextView);
         bluetoothTextView = (TextView) findViewById(R.id.bluetoothTextView);
+        bluetoothInfoTextView = (TextView) findViewById(R.id.bluetoothInfoTextView);
         wifiTextView = (TextView) findViewById(R.id.wifiTextView);
+        wifiInfoTextView = (TextView) findViewById(R.id.wifiInfoTextView);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -209,31 +219,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER) && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
 
-
+        setWifi();
+        setBlueTooth();
     }
-
-    private final LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            latTv.setText(String.valueOf(location.getLatitude()));
-            lonTv.setText(String.valueOf(location.getLongitude()));
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
 
     @Override
     protected void onStart() {
@@ -313,7 +301,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.dispatchKeyEvent(event);
     }
 
-
     // CardView 클릭 시
     @Override
     public void onClick(View v) {
@@ -391,9 +378,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.bluetoothCardView:
+                if (bluetoothAdapter.getState() == BluetoothAdapter.STATE_TURNING_ON || bluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
+                    bluetoothAdapter.disable();
+                    bluetoothTextView.setText("OFF");
+                    bluetoothInfoTextView.setText("카드 클릭시 블루투스 ON");
+                } else {
+                    bluetoothAdapter.enable();
+                    bluetoothTextView.setText("ON");
+                    bluetoothInfoTextView.setText("카드 클릭시 블루투스 OFF");
+                }
                 break;
 
             case R.id.wifiCardView:
+                if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED ||
+                        wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLING) {
+                    wifiManager.setWifiEnabled(false);
+                    wifiTextView.setText("OFF");
+                    wifiInfoTextView.setText("카드 클릭시 와이파이 ON");
+                } else {
+                    wifiManager.setWifiEnabled(true);
+                    wifiTextView.setText("ON");
+                    wifiInfoTextView.setText("카드 클릭시 와이파이 OFF");
+                }
                 break;
         }
     }
@@ -437,7 +443,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
 
     // 근접 센서
     private class proximityListener implements SensorEventListener {
@@ -538,6 +543,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+
+    private void setWifi() {
+        wifiManager = (WifiManager) this.getApplicationContext().getSystemService(Activity.WIFI_SERVICE);
+        if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED || wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLING) {
+            wifiTextView.setText("ON");
+            wifiInfoTextView.setText("카드 클릭시 와이파이 OFF");
+        } else {
+            wifiTextView.setText("OFF");
+            wifiInfoTextView.setText("카드 클릭시 와이파이 ON");
+        }
+    }
+
+    private void setBlueTooth() {
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        if (bluetoothAdapter.getState() == BluetoothAdapter.STATE_TURNING_ON || bluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
+            bluetoothTextView.setText("ON");
+            bluetoothInfoTextView.setText("카드 클릭시 블루투스 OFF");
+        } else {
+            bluetoothTextView.setText("OFF");
+            bluetoothInfoTextView.setText("카드 클릭시 블루투스 ON");
+        }
+    }
+
+    private final LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            latTv.setText(String.valueOf(location.getLatitude()));
+            lonTv.setText(String.valueOf(location.getLongitude()));
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     // 드롭메뉴
     @Override
