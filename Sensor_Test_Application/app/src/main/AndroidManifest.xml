@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -34,6 +35,7 @@
         <activity android:name=".SpeakerActivity" />
         <activity android:name=".KeyPressActivity" />
         <activity android:name=".RstpActivity" />
+        <activity android:name=".CameraActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

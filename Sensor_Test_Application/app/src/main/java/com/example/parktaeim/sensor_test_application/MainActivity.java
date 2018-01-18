@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView lightTv;
     private TextView keyPressTextView;
     private TextView latTv, lonTv;
+    private TextView hdmiTextView;
+    private TextView bluetoothTextView;
+    private TextView wifiTextView;
 
     private CardView accelometerCardView;
     private CardView gyroscopeCardView;
@@ -77,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CardView keyCardView;
     private CardView speakerCardView;
     private CardView micCardView;
-
+    private CardView cameraCardView;
+    private CardView hdmiCardView;
+    private CardView bluetoothCardView;
+    private CardView wifiCardView;
 
     private VueLed vueLed;
     private VueLed vueLed1;
@@ -119,6 +125,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         latTv = (TextView) findViewById(R.id.latTextView);
         lonTv = (TextView) findViewById(R.id.lonTextView);
         colorTextView = (TextView) findViewById(R.id.colorTextView);
+        keyPressTextView = (TextView) findViewById(R.id.keyPressTextView);
+        hdmiTextView = (TextView) findViewById(R.id.hdmiOnOffTextView);
+        bluetoothTextView = (TextView) findViewById(R.id.bluetoothTextView);
+        wifiTextView = (TextView) findViewById(R.id.wifiTextView);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -160,7 +170,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         keyCardView = (CardView) findViewById(R.id.keyPressCardView);
         speakerCardView = (CardView) findViewById(R.id.speakerCardView);
         micCardView = (CardView) findViewById(R.id.micCardView);
-        keyPressTextView = (TextView) findViewById(R.id.keyPressTextView);
+        cameraCardView = (CardView) findViewById(R.id.cameraCardView);
+        hdmiCardView = (CardView) findViewById(R.id.hdmiCardView);
+        bluetoothCardView = (CardView) findViewById(R.id.bluetoothCardView);
+        wifiCardView = (CardView) findViewById(R.id.wifiCardView);
 
         accelometerCardView.setOnClickListener(this);
         gyroscopeCardView.setOnClickListener(this);
@@ -172,6 +185,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         keyCardView.setOnClickListener(this);
         speakerCardView.setOnClickListener(this);
         micCardView.setOnClickListener(this);
+        cameraCardView.setOnClickListener(this);
+        hdmiCardView.setOnClickListener(this);
+        bluetoothCardView.setOnClickListener(this);
+        wifiCardView.setOnClickListener(this);
 
         vueLed = new VueLed("red");
         vueLed1 = new VueLed("green");
@@ -364,6 +381,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.micCardView:
                 startActivity(new Intent(this, MicActivity.class));
+                break;
+
+            case R.id.cameraCardView:
+                startActivity(new Intent(this, CameraActivity.class));
+                break;
+
+            case R.id.hdmiCardView:
+                break;
+
+            case R.id.bluetoothCardView:
+                break;
+
+            case R.id.wifiCardView:
                 break;
         }
     }
