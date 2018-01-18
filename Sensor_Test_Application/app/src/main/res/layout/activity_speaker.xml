@@ -23,20 +23,38 @@
             android:text="SPEAKER"
             android:textColor="#FFFFFF" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/changeTestBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:background="#FFC107"
+                android:text="음량 테스트"
+                android:textColor="#FFF"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/hzTestLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/hzTextView"
@@ -56,7 +74,7 @@
         </LinearLayout>
 
         <SeekBar
-            android:id="@+id/seekbar"
+            android:id="@+id/hzSeekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -69,5 +87,56 @@
             android:background="#009688"
             android:text="PLAY"
             android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/soundTestLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/icon_play"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon_play"/>
+
+        <ImageView
+            android:id="@+id/icon_pause"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon_pause"
+            android:visibility="gone"/>
+
+        <SeekBar
+            android:id="@+id/soundSeekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:max="100" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Volume : "
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/volumeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
