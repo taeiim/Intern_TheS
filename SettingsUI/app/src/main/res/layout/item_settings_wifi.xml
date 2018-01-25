@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:layout_marginLeft="5dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_wifi"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp">
+        <TextView
+            android:id="@+id/item_wifi_titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THE-S"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/item_wifi_connectTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="연결됨"
+            android:textSize="15sp" />
+    </LinearLayout>
+</LinearLayout>

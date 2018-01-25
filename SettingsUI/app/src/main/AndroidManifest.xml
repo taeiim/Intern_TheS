@@ -9,13 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".Activity.SettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.SettingsBluetoothActivity"/>
+        <activity android:name=".Activity.SettingsLocationActivity"/>
+        <activity android:name=".Activity.SettingsLocationActivity2"/>
+        <activity android:name=".Activity.SettingsWifiActivity"/>
+        <activity android:name=".Activity.DeviceWallpaperActivity"/>
+        <activity android:name=".Activity.DeviceCapacityActivity"/>
+        <activity android:name=".Activity.DeviceInfoActivity"/>
+        <activity android:name=".Activity.DeviceLanguageActivity"/>
+        <activity android:name=".Activity.DeviceResetActivity"/>
+        <activity android:name=".Activity.DeviceSoftwareUpdateActivity"/>
+
     </application>
 
 </manifest>
