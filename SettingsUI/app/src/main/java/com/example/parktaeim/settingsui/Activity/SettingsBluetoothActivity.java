@@ -20,6 +20,7 @@ public class SettingsBluetoothActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("블루투스");
     }
 
     @Override

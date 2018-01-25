@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="초기화를 하면 VUECAM의 내부저장소의 모든 데이터가 삭제 됩니다."
+            android:layout_marginBottom="8dp"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="・ 모든계정 \n・ 시스템과 앱 데이터 및 설정\n・ 설치된 모든 앱\n・ 음악\n・ 사진\n・ 기타 사용자 데이터"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재 로그인한 계정 : "
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="・ 개인계정"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_google"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VUECAM.CC @ gmail.com"
+                android:layout_marginLeft="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_facebook"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="jolongmal"
+                android:layout_marginLeft="16dp"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_corners"
+            android:textColor="#FFFFFF"
+            android:text="기기 초기화"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="24dp"/>
+    </LinearLayout>
+</ScrollView>

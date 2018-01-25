@@ -16,11 +16,8 @@ public class SettingsWifiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_bluetooth);
+        setContentView(R.layout.activity_settings_wifi);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Wi-Fi");
     }
 
     @Override

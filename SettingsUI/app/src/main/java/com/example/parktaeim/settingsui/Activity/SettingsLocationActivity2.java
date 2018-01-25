@@ -16,10 +16,12 @@ public class SettingsLocationActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_bluetooth);
+        setContentView(R.layout.activity_settings_location_2);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("위치 인식 방식");
+
     }
 
     @Override

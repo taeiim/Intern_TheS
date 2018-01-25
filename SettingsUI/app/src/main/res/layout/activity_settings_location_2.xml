@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+        
+        <RadioButton
+            android:id="@+id/radioBtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"
+            android:checked="true"/>
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="높은 위치 방식"
+            android:textSize="17dp" 
+            android:layout_toRightOf="@+id/radioBtn1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 위치를 파악하기위해 GPS, Wi-Fi, 네트워크를 사용합니다."
+            android:textColor="@color/colorAccent"
+            android:textSize="13dp" 
+            android:layout_below="@+id/tv1"
+            android:layout_toRightOf="@id/radioBtn1"/>
+    </RelativeLayout>
+    <View style="@style/Divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <RadioButton
+            android:id="@+id/radioBtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="배터리 절전"
+            android:textSize="17dp"
+            android:layout_toRightOf="@+id/radioBtn2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 위치를 파악하기위해 GPS, Wi-Fi, 네트워크를 사용합니다."
+            android:textColor="@color/colorAccent"
+            android:textSize="13dp"
+            android:layout_below="@+id/tv2"
+            android:layout_toRightOf="@id/radioBtn2"/>
+    </RelativeLayout>
+    <View style="@style/Divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <RadioButton
+            android:id="@+id/radioBtn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 디바이스만"
+            android:textSize="17dp"
+            android:layout_toRightOf="@+id/radioBtn3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 위치를 파악하기위해 GPS, Wi-Fi, 네트워크를 사용합니다."
+            android:textColor="@color/colorAccent"
+            android:textSize="13dp"
+            android:layout_below="@+id/tv3"
+            android:layout_toRightOf="@id/radioBtn3"/>
+    </RelativeLayout>
+    <View style="@style/Divider"/>
+
+</LinearLayout>
