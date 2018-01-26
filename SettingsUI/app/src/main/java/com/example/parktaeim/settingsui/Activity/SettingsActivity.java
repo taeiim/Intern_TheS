@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.parktaeim.settingsui.R;
 
@@ -18,9 +19,9 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        LinearLayout wifi = (LinearLayout) findViewById(R.id.settings_wifi);
-        LinearLayout bluetooth = (LinearLayout) findViewById(R.id.settings_bluetooth);
-        LinearLayout location = (LinearLayout) findViewById(R.id.settings_location);
+        RelativeLayout wifi = (RelativeLayout) findViewById(R.id.settings_wifi);
+        RelativeLayout bluetooth = (RelativeLayout) findViewById(R.id.settings_bluetooth);
+        RelativeLayout location = (RelativeLayout) findViewById(R.id.settings_location);
         LinearLayout wallpaper = (LinearLayout) findViewById(R.id.device_wallpaper);
         LinearLayout capacity = (LinearLayout) findViewById(R.id.device_capacity);
         LinearLayout language = (LinearLayout) findViewById(R.id.device_language);
@@ -37,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
         language.setOnClickListener(v-> startActivity(new Intent(getApplicationContext(),DeviceLanguageActivity.class)));
         info.setOnClickListener(v-> startActivity(new Intent(getApplicationContext(),DeviceInfoActivity.class)));
         reset.setOnClickListener(v-> startActivity(new Intent(getApplicationContext(),DeviceResetActivity.class)));
+
     }
 
 }

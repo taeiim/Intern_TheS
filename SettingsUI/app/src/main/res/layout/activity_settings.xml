@@ -14,9 +14,9 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="설정"
+            android:textColor="#000"
             android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="#000"/>
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
@@ -25,78 +25,156 @@
             android:layout_marginRight="8dp"
             android:background="#BDBDBD" />
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/settings_wifi"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
+                android:layout_height="@dimen/item_height"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="8dp">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/wifi_img"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:checked="true"
+                    android:src="@drawable/ic_wifi_black_24px" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wi-Fi"
-                    android:textSize="25dp"/>
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/wifi_img"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:id="@+id/wifiTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/wifi_img"
+                        android:text="Wi-Fi"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/wifiTv"
+                        android:layout_toRightOf="@id/wifi_img"
+                        android:text="THE-S >"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/small_text_size" />
+
+                </LinearLayout>
+
+                <Switch
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="THE-S"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18dp"/>
-
-            </LinearLayout>
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:checked="true"
+                    android:switchMinWidth="60dp" />
+            </RelativeLayout>
 
             <View style="@style/Divider" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/settings_bluetooth"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
+                android:layout_height="@dimen/item_height"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="8dp">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/bluetooth_img"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:checked="true"
+                    android:src="@drawable/ic_bluetooth" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="블루투스"
-                    android:textSize="25dp"/>
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/bluetooth_img"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:id="@+id/bluetoothTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="블루투스"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/bluetoothTv"
+                        android:layout_marginRight="16dp"
+                        android:text="연결된 기기"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <Switch
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="연결된 기기"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18dp"/>
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:switchMinWidth="60dp" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <View style="@style/Divider" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/settings_location"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:gravity="center_vertical">
+                android:layout_height="@dimen/item_height"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/locationImg"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:checked="true"
+                    android:src="@drawable/ic_location" />
+
                 <TextView
                     android:id="@+id/item_settings_titleTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:padding="10dp"
+                    android:layout_alignTop="@+id/switch1"
+                    android:layout_toRightOf="@+id/locationImg"
                     android:text="위치"
-                    android:textSize="25dp" />
+                    android:textSize="@dimen/big_text_size" />
 
-            </LinearLayout>
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:checked="true"
+                    android:switchMinWidth="60dp" />
+
+            </RelativeLayout>
+
             <View style="@style/Divider" />
 
         </LinearLayout>
@@ -108,9 +186,9 @@
             android:layout_marginTop="8dp"
             android:padding="16dp"
             android:text="기기"
+            android:textColor="#000"
             android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="#000"/>
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
@@ -127,151 +205,174 @@
             <LinearLayout
                 android:id="@+id/device_wallpaper"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:orientation="horizontal"
+                android:layout_height="@dimen/item_height"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/ic_phone_android_black_24px"/>
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:src="@drawable/ic_phone_android_black_24px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="배경화면 설정"
                     android:layout_marginLeft="16dp"
-                    android:textSize="25dp"/>
+                    android:text="배경화면 설정"
+                    android:textSize="@dimen/big_text_size" />
             </LinearLayout>
+
             <View style="@style/Divider" />
 
             <LinearLayout
                 android:id="@+id/device_capacity"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:orientation="horizontal"
+                android:layout_height="@dimen/item_height"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/ic_opacity_black_24px"/>
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:src="@drawable/ic_opacity_black_24px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="용량"
                     android:layout_marginLeft="16dp"
-                    android:textSize="25dp"/>
+                    android:text="용량"
+                    android:textSize="@dimen/big_text_size" />
             </LinearLayout>
+
             <View style="@style/Divider" />
 
             <LinearLayout
                 android:id="@+id/device_language"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:orientation="horizontal"
+                android:layout_height="@dimen/item_height"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/ic_g_translate_black_24px"/>
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:src="@drawable/ic_g_translate_black_24px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="언어"
                     android:layout_marginLeft="16dp"
-                    android:textSize="25dp"/>
+                    android:text="언어"
+                    android:textSize="@dimen/big_text_size" />
             </LinearLayout>
+
             <View style="@style/Divider" />
 
             <RelativeLayout
                 android:id="@+id/device_camera"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
+                android:layout_height="@dimen/item_height"
                 android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
                     android:id="@+id/cameraImg"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/ic_local_see_black_24px"
-                    android:layout_centerVertical="true"/>
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_local_see_black_24px" />
+
                 <TextView
-                    android:layout_toRightOf="@+id/cameraImg"
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="카메라 빠른 실행"
-                    android:layout_marginLeft="16dp"
                     android:layout_centerVertical="true"
-                    android:textSize="25dp"/>
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/cameraImg"
+                    android:text="카메라 빠른 실행"
+                    android:textSize="@dimen/big_text_size" />
 
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:checked="true"/>
+                    android:checked="true"
+                    android:switchMinWidth="60dp" />
             </RelativeLayout>
+
             <View style="@style/Divider" />
 
             <LinearLayout
                 android:id="@+id/device_info"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:orientation="horizontal"
+                android:layout_height="@dimen/item_height"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/ic_list_black_24px"/>
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:src="@drawable/ic_list_black_24px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VUECAM 정보"
                     android:layout_marginLeft="16dp"
-                    android:textSize="25dp"/>
+                    android:text="VUECAM 정보"
+                    android:textSize="@dimen/big_text_size" />
             </LinearLayout>
+
             <View style="@style/Divider" />
 
             <LinearLayout
                 android:id="@+id/device_software_update"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:orientation="horizontal"
+                android:layout_height="@dimen/item_height"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/ic_compare_arrows_black_24px"/>
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:src="@drawable/ic_compare_arrows_black_24px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="소프트웨어 업데이트 - 보류"
                     android:layout_marginLeft="16dp"
-                    android:textSize="25dp"/>
+                    android:text="소프트웨어 업데이트 - 보류"
+                    android:textSize="@dimen/big_text_size" />
             </LinearLayout>
+
             <View style="@style/Divider" />
 
             <LinearLayout
                 android:id="@+id/device_reset"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:orientation="horizontal"
+                android:layout_height="@dimen/item_height"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/ic_refresh_black_24px"/>
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:src="@drawable/ic_refresh_black_24px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VUECAM 초기화"
                     android:layout_marginLeft="16dp"
-                    android:textSize="25dp"/>
+                    android:text="VUECAM 초기화"
+                    android:textSize="@dimen/big_text_size" />
             </LinearLayout>
+
             <View style="@style/Divider" />
 
         </LinearLayout>

@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.parktaeim.settingsui.R;
 
@@ -18,19 +21,15 @@ public class SettingsBluetoothActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_bluetooth);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("블루투스");
+        setUpToolbar();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    private void setUpToolbar() {
+        TextView toolbarTv = (TextView) findViewById(R.id.toolbarTitle);
+        toolbarTv.setText("블루투스");
+        LinearLayout backIcon = (LinearLayout) findViewById(R.id.toolbarBackIcon);
+        backIcon.setOnClickListener(v -> finish());
     }
+
 
 }

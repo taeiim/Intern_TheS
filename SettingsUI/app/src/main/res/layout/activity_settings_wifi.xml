@@ -1,136 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+        android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/radioBtn1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_wifi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="THE-S"
-                android:textSize="17dp"
-                android:layout_toRightOf="@+id/radioBtn1"
-                android:textColor="@color/colorAccent" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="center_vertical"
+                    android:padding="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="연결됨"
-                android:textSize="13dp"
-                android:layout_below="@+id/tv1"
-                android:layout_toRightOf="@id/radioBtn1"/>
-        </RelativeLayout>
-        <View style="@style/Divider"/>
+                    <ImageView
+                        android:id="@+id/radioBtn1"
+                        android:layout_width="@dimen/image_width"
+                        android:layout_height="@dimen/image_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/icon_wifi" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/radioBtn1"
+                        android:text="THE-S"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/big_text_size" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_wifi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv1"
+                        android:layout_toRightOf="@id/radioBtn1"
+                        android:text="연결됨"
+                        android:textSize="18dp" />
+                </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="THE-S"
-                android:textSize="17dp"
-                android:layout_toRightOf="@+id/radioBtn1"/>
-        </LinearLayout>
-        <View style="@style/Divider"/>
+                <View style="@style/Divider" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="center_vertical"
+                    android:padding="8dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_wifi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="8dp"/>
+                    <ImageView
+                        android:layout_width="@dimen/image_width"
+                        android:layout_height="@dimen/image_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/icon_wifi" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TwifiZone"
-                android:textSize="17dp"
-                android:layout_toRightOf="@+id/radioBtn1"/>
-        </LinearLayout>
-        <View style="@style/Divider"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/radioBtn1"
+                        android:text="THE-S"
+                        android:textSize="@dimen/big_text_size" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+                <View style="@style/Divider" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_wifi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="8dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="center_vertical"
+                    android:padding="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="it's wifi"
-                android:textSize="17dp"
-                android:layout_toRightOf="@+id/radioBtn1"/>
-        </LinearLayout>
-        <View style="@style/Divider"/>
+                    <ImageView
+                        android:layout_width="@dimen/image_width"
+                        android:layout_height="@dimen/image_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/icon_wifi" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/radioBtn1"
+                        android:text="TwifiZone"
+                        android:textSize="@dimen/big_text_size" />
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_wifi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="8dp"/>
+                <View style="@style/Divider" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="melong"
-                android:textSize="17dp"
-                android:layout_toRightOf="@+id/radioBtn1"/>
-        </LinearLayout>
-        <View style="@style/Divider"/>
-    </LinearLayout>
-</ScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="center_vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/image_width"
+                        android:layout_height="@dimen/image_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/icon_wifi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/radioBtn1"
+                        android:text="it's wifi"
+                        android:textSize="@dimen/big_text_size" />
+                </LinearLayout>
+
+                <View style="@style/Divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="center_vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/icon_wifi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/radioBtn1"
+                        android:text="melong"
+                        android:textSize="@dimen/big_text_size" />
+                </LinearLayout>
+
+                <View style="@style/Divider" />
+            </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

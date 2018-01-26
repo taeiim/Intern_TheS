@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.parktaeim.settingsui.R;
 
@@ -20,23 +21,17 @@ public class SettingsLocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_location);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("위치");
-
         LinearLayout goLocation2 = (LinearLayout) findViewById(R.id.intentLocation2Layout);
         goLocation2.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),SettingsLocationActivity2.class)));
 
+        setUpToolbar();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    private void setUpToolbar() {
+        TextView toolbarTv = (TextView) findViewById(R.id.toolbarTitle);
+        toolbarTv.setText("위치");
+        LinearLayout backIcon = (LinearLayout) findViewById(R.id.toolbarBackIcon);
+        backIcon.setOnClickListener(v -> finish());
     }
 
 }
